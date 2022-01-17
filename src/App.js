@@ -17,10 +17,8 @@ const handleAdd= ()=>{
 
   useEffect(() => {
     console.log("App render")
-   /*  return () => {
-      cleanup
-    } */
-  }, /* [input] */)
+
+  },)
 
   return (
     <div>
