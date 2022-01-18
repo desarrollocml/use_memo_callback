@@ -2,7 +2,7 @@ import React, { memo, useEffect } from "react";
 
 const Item = memo(({ user, handleDelete }) => {
   useEffect(() => {
-    console.log("Item render");
+    //console.log("Item render");
   });
 
   return (

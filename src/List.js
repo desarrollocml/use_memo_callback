@@ -4,7 +4,7 @@ import Item from "./Item";
  const List = memo(({ users, handleDelete }) =>{
 
   useEffect(() => {
-      console.log("List render")
+     // console.log("List render")
       
   }, )
 

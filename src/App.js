@@ -1,4 +1,4 @@
-import { useState, useEffect, useMemo,useCallback } from "react";
+import { useState, useEffect, useMemo, useCallback } from "react";
 import List from "./List";
 
 const initialUsers = [
@@ -15,10 +15,12 @@ function App() {
     setUsers([...users, newUser]);
   };
 
-  const handleDelete= useCallback(
-     (userId) => {
-        setUsers(users.filter((user) => user.id !== userId));
-      },[users])
+  const handleDelete = useCallback(
+    (userId) => {
+      setUsers(users.filter((user) => user.id !== userId));
+    },
+    [users]
+  );
 
   const handleSearch = () => {
     setSearch(text);
@@ -34,8 +36,16 @@ function App() {
   );
 
   useEffect(() => {
-    console.log("App render");
+    // console.log("App render");
   });
+
+  const printUsers = useCallback(() => {
+    console.log("changed users",users);
+  },[users])
+
+  useEffect(() => {
+    printUsers();
+  }, [users, printUsers]);
 
   return (
     <div>
