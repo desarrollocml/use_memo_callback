@@ -1,4 +1,4 @@
-import { useState,useEffect } from "react";
+import { useState, useEffect, useMemo } from "react";
 import List from "./List";
 
 const initialUsers = [
@@ -6,31 +6,42 @@ const initialUsers = [
   { id: 2, name: "Maria" },
 ];
 function App() {
-  
   const [users, setUsers] = useState(initialUsers);
-  const [text, setText] = useState("Nuevo")
+  const [text, setText] = useState("");
+  const [search, setSearch] = useState("");
 
-const handleAdd= ()=>{
-  const newUser = {id:Date.now(), name:text}
-  setUsers([...users,newUser])
-}
+  const handleAdd = () => {
+    const newUser = { id: Date.now(), name: text };
+    setUsers([...users, newUser]);
+  };
+
+  const handleSearch = () => {
+    setSearch(text);
+  };
+
+  const filteredUsers = useMemo(
+    () =>
+      users.filter((user) => {
+        console.log("filter process");
+        return user.name.toLowerCase().includes(search.toLowerCase());
+      }),
+    [search,users]
+  );
 
   useEffect(() => {
-    console.log("App render")
-
-  },)
+    console.log("App render");
+  });
 
   return (
     <div>
       <input
-        type= "text"
+        type="text"
         value={text}
-        onChange={(e)=>setText(e.target.value)}
+        onChange={(e) => setText(e.target.value)}
       ></input>
-      <button onClick={handleAdd}>
-        Add
-      </button>
-      <List users={users}></List>
+      <button onClick={handleSearch}>Search</button>
+      <button onClick={handleAdd}>Add</button>
+      <List users={filteredUsers}></List>
     </div>
   );
 }
