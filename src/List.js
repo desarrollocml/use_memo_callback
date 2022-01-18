@@ -1,10 +1,10 @@
 import React, { useEffect, memo } from "react";
 import Item from "./Item";
 
- const List = memo(({ users }) =>{
+ const List = memo(({ users, handleDelete }) =>{
 
   useEffect(() => {
-     // console.log("List render")
+      console.log("List render")
       
   }, )
 
@@ -12,7 +12,11 @@ import Item from "./Item";
     <div>
       <ul>
         {users.map((user) => (
-          <Item key ={user.id} user={user}></Item>
+          <Item
+           key ={user.id}
+           user={user}
+           handleDelete={handleDelete}
+           ></Item>
         ))}
       </ul>
     </div>

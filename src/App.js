@@ -1,4 +1,4 @@
-import { useState, useEffect, useMemo } from "react";
+import { useState, useEffect, useMemo,useCallback } from "react";
 import List from "./List";
 
 const initialUsers = [
@@ -15,6 +15,11 @@ function App() {
     setUsers([...users, newUser]);
   };
 
+  const handleDelete= useCallback(
+     (userId) => {
+        setUsers(users.filter((user) => user.id !== userId));
+      },[users])
+
   const handleSearch = () => {
     setSearch(text);
   };
@@ -22,10 +27,10 @@ function App() {
   const filteredUsers = useMemo(
     () =>
       users.filter((user) => {
-        console.log("filter process");
+        //console.log("filter process");
         return user.name.toLowerCase().includes(search.toLowerCase());
       }),
-    [search,users]
+    [search, users]
   );
 
   useEffect(() => {
@@ -41,7 +46,7 @@ function App() {
       ></input>
       <button onClick={handleSearch}>Search</button>
       <button onClick={handleAdd}>Add</button>
-      <List users={filteredUsers}></List>
+      <List users={filteredUsers} handleDelete={handleDelete}></List>
     </div>
   );
 }
